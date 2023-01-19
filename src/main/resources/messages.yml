@@ -1,1 +1,20 @@
-#Messages test
+################
+# Messages.yml #
+################
+messages-version: 1
+
+prefix: "&7[&2Welcomer&7] "
+
+# Errors #
+errors:
+  not-a-player: "&cVous devez être un joueur pour faire cette commande !"
+  not-enough-arguments: "&cPas assez d'arguments !"
+  player-not-found: "&cJoueur non trouver !"
+  cant-welcome: "&cVous ne pouvez pas souhaiter la bienvenue à ce joueur !"
+  cant-welcome-yourself: "&cVous ne pouvez pas vous souhaitez la bienvenue vous même !"
+
+# First Join #
+first-join:
+  announcement: "&cBienvenue à &b%player%&c sur MonServeur !"
+  hover: "Clique sur moi pour lui souhaiter bienvenue !"
+  welcome: "Bienvenue %target% !"

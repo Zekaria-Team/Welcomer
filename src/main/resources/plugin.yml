@@ -5,3 +5,7 @@ api-version: 1.14
 authors: [ Velris, Myoxyss ]
 description: Plugin made to welcome players.
 website: https://discord.gg/yDtMvtkk5F
+commands:
+  welcome:
+    description: Commande pour souhaiter la bienvenue
+    usage: /<command> [player]

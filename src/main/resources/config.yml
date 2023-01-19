@@ -1,1 +1,9 @@
-#Config Test
+##############
+# Config.yml #
+##############
+config-version: 1
+
+# First Join #
+#How much time online players have to welcome. (In seconds)
+first-join:
+  time-to-welcome: 30
