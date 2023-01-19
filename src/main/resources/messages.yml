@@ -7,14 +7,14 @@ prefix: "&7[&2Welcomer&7] "
 
 # Errors #
 errors:
-  not-a-player: "&cVous devez être un joueur pour faire cette commande !"
-  not-enough-arguments: "&cPas assez d'arguments !"
-  player-not-found: "&cJoueur non trouver !"
-  cant-welcome: "&cVous ne pouvez pas souhaiter la bienvenue à ce joueur !"
-  cant-welcome-yourself: "&cVous ne pouvez pas vous souhaitez la bienvenue vous même !"
+  not-a-player: "&cYou must be a player to perform this command!"
+  not-enough-arguments: "&cNot enough arguments!"
+  player-not-found: "&cPlayer not found!"
+  cant-welcome: "&cYou can't welcome this player!"
+  cant-welcome-yourself: "&cYou can't welcome yourself!"
 
 # First Join #
 first-join:
-  announcement: "&cBienvenue à &b%player%&c sur MonServeur !"
-  hover: "Clique sur moi pour lui souhaiter bienvenue !"
-  welcome: "Bienvenue %target% !"
+  announcement: "&cWelcome &b%player%&c on MyServer!"
+  hover: "&bClick here to welcome him!"
+  welcome: "Welcome %target% !"
