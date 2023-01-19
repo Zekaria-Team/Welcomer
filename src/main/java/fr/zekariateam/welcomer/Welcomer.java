@@ -44,6 +44,7 @@ public final class Welcomer extends JavaPlugin {
          */
         uUtils = new UUtils();
         uDataStorage = new UDataStorage();
+        uDataStorage.InitDataStorage();
         uDataStorage.LoadConfig();
         uDataStorage.LoadMessages();
 
