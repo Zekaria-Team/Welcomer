@@ -2,6 +2,10 @@ package fr.zekariateam.welcomer.utils;
 
 public class UDataStorage {
 
+    private static UDataStorage instance;
+
+
+
     public void LoadConfig() {
 
     }
@@ -10,4 +14,7 @@ public class UDataStorage {
 
     }
 
+    public static UDataStorage getInstance() {
+        return instance;
+    }
 }
