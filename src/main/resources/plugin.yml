@@ -1,0 +1,7 @@
+name: Welcomer
+version: '${project.version}'
+main: fr.zekariateam.welcomer.Welcomer
+api-version: 1.19
+authors: [ Velris, Myoxyss ]
+description: Plugin made to welcome players.
+website: https://discord.gg/yDtMvtkk5F
