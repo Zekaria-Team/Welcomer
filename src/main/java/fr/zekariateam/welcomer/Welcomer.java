@@ -52,11 +52,14 @@ public final class Welcomer extends JavaPlugin {
          */
         mListeners.InitListeners();
         mCommands.InitCommands();
+
+        Log(Level.INFO, "Welcomer has been loaded!");
+
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        Log(Level.INFO, "Welcomer has been unloaded!");
     }
 
     public void Log(Level level, String message) {

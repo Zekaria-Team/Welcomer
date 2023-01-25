@@ -1,7 +1,11 @@
 package fr.zekariateam.welcomer.managers;
 
 import fr.zekariateam.welcomer.Welcomer;
+import fr.zekariateam.welcomer.commands.CTabWelcomer;
 import fr.zekariateam.welcomer.commands.CWelcome;
+import fr.zekariateam.welcomer.commands.CWelcomer;
+
+import java.util.Objects;
 
 public class MCommands {
 
@@ -9,7 +13,10 @@ public class MCommands {
 
     public void InitCommands() {
         // /welcome [player]
-        main.getCommand("welcome").setExecutor(new CWelcome());
+        Objects.requireNonNull(main.getCommand("welcome")).setExecutor(new CWelcome());
+        // /welcomer [enable | disable | set]
+        Objects.requireNonNull(main.getCommand("welcomer")).setExecutor(new CWelcomer());
+        Objects.requireNonNull(main.getCommand("welcomer")).setTabCompleter(new CTabWelcomer());
     }
 
 }

@@ -9,3 +9,8 @@ commands:
   welcome:
     description: Commande pour souhaiter la bienvenue
     usage: /<command> [player]
+    permission: welcomer.welcome
+  welcomer:
+    description: Commande de configuration du plugin
+    permission: welcomer.config
+    usage: /<command> spawn [set | enable | disable]

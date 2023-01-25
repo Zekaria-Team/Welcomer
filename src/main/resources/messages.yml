@@ -1,6 +1,8 @@
 ################
 # Messages.yml #
 ################
+
+# Do not touch this parameter!
 messages-version: 1
 
 prefix: "&7[&2Welcomer&7] "
@@ -18,3 +20,11 @@ first-join:
   announcement: "&cWelcome &b%player%&c on MyServer!"
   hover: "&bClick here to welcome him!"
   welcome: "Welcome %target% !"
+
+# Spawn #
+spawn:
+  set: "&cYou have set the spawn !"
+  enable: "&cYou have enabled the spawn system !"
+  disable: "&cYou have disabled the spawn system !"
+  already-enable: "&cSpawn is already enabled !"
+  already-disable: "&cSpawn is already disabled !"
