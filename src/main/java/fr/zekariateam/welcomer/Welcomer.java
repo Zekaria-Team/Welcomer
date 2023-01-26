@@ -5,6 +5,7 @@ import fr.zekariateam.welcomer.managers.MFiles;
 import fr.zekariateam.welcomer.managers.MListeners;
 import fr.zekariateam.welcomer.utils.UDataStorage;
 import fr.zekariateam.welcomer.utils.UUtils;
+import fr.zekariateam.welcomer.utils.UpdateChecker;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -52,6 +53,14 @@ public final class Welcomer extends JavaPlugin {
          */
         mListeners.InitListeners();
         mCommands.InitCommands();
+
+        new UpdateChecker(this, 107615).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                getLogger().info("There is not a new update available.");
+            } else {
+                getLogger().info("There is a new update available.");
+            }
+        });
 
         Log(Level.INFO, "Welcomer has been loaded!");
 
