@@ -1,1 +1,30 @@
-#Messages test
+################
+# Messages.yml #
+################
+
+# Do not touch this parameter!
+messages-version: 1
+
+prefix: "&7[&2Welcomer&7] "
+
+# Errors #
+errors:
+  not-a-player: "&cYou must be a player to perform this command!"
+  not-enough-arguments: "&cNot enough arguments!"
+  player-not-found: "&cPlayer not found!"
+  cant-welcome: "&cYou can't welcome this player!"
+  cant-welcome-yourself: "&cYou can't welcome yourself!"
+
+# First Join #
+first-join:
+  announcement: "&cWelcome &b%player%&c on MyServer!"
+  hover: "&bClick here to welcome him!"
+  welcome: "Welcome %target% !"
+
+# Spawn #
+spawn:
+  set: "&cYou have set the spawn !"
+  enable: "&cYou have enabled the spawn system !"
+  disable: "&cYou have disabled the spawn system !"
+  already-enable: "&cSpawn is already enabled !"
+  already-disable: "&cSpawn is already disabled !"

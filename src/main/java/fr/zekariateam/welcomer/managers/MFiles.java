@@ -1,9 +1,12 @@
 package fr.zekariateam.welcomer.managers;
 
+import dev.dejvokep.boostedyaml.YamlDocument;
+import dev.dejvokep.boostedyaml.dvs.versioning.BasicVersioning;
+import dev.dejvokep.boostedyaml.settings.dumper.DumperSettings;
+import dev.dejvokep.boostedyaml.settings.general.GeneralSettings;
+import dev.dejvokep.boostedyaml.settings.loader.LoaderSettings;
+import dev.dejvokep.boostedyaml.settings.updater.UpdaterSettings;
 import fr.zekariateam.welcomer.Welcomer;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,27 +19,18 @@ public class MFiles {
     /*
     FILES
      */
-    private File config;
-    public FileConfiguration configFile;
-    private File messages;
-    public FileConfiguration messagesFile;
+    public YamlDocument config;
+    public YamlDocument messages;
 
     public void InitFiles() {
-        CreateFile("config.yml", config, configFile);
-        CreateFile("messages.yml", messages, messagesFile);
-    }
-
-    public void CreateFile(String name, File file, FileConfiguration fileConfiguration) {
-        file = new File(main.getDataFolder(), name);
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            main.saveResource(name, false);
-        }
-
-        fileConfiguration = new YamlConfiguration();
         try {
-            fileConfiguration.load(file);
-        } catch (IOException | InvalidConfigurationException exception) {
+            config = YamlDocument.create(new File(main.getDataFolder(), "config.yml"), main.getResource("config.yml"),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT,
+                    UpdaterSettings.builder().setVersioning(new BasicVersioning("config-version")).build());
+            messages = YamlDocument.create(new File(main.getDataFolder(), "messages.yml"), main.getResource("messages.yml"),
+                    GeneralSettings.DEFAULT, LoaderSettings.builder().setAutoUpdate(true).build(), DumperSettings.DEFAULT,
+                    UpdaterSettings.builder().setVersioning(new BasicVersioning("messages-version")).build());
+        } catch (IOException exception) {
             main.Log(Level.SEVERE, exception.getMessage());
         }
     }
