@@ -6,7 +6,7 @@
 
     <groupId>fr.zekariateam</groupId>
     <artifactId>Welcomer</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>Welcomer</name>

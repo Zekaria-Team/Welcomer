@@ -22,6 +22,8 @@ public class UDataStorage {
     CONFIG
      */
     public Integer FIRST_JOIN_TIMER;
+    public Boolean OPTIONS_CLICKABLE_MESSAGE;
+    public Boolean OPTIONS_HOVER_MESSAGE;
     //SPAWN
     public Boolean SPAWN_ENABLE;
     public World SPAWN_WORLD;
@@ -56,6 +58,9 @@ public class UDataStorage {
         YamlDocument config = main.getmFiles().config;
 
         FIRST_JOIN_TIMER = config.getInt("first-join.time-to-welcome")*20;
+        OPTIONS_CLICKABLE_MESSAGE = config.getBoolean("first-join.options.clickable-message");
+        OPTIONS_HOVER_MESSAGE = config.getBoolean("first-join.options.hover-message");
+
         SPAWN_ENABLE = config.getBoolean("spawn.enable");
         if (SPAWN_ENABLE) {
             SPAWN_WORLD = Bukkit.getWorld(config.getString("spawn.location.world"));

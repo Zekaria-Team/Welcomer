@@ -39,8 +39,13 @@ public class LPlayerJoin implements Listener {
             Welcome
              */
             TextComponent announcement = new TextComponent(data.FIRST_JOIN_ANNOUNCEMENT.replace("%player%", player.getName()));
-            announcement.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(data.FIRST_JOIN_HOVER)));
-            announcement.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/welcome "+player.getName()));
+            if (main.getuDataStorage().OPTIONS_HOVER_MESSAGE) {
+                announcement.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(data.FIRST_JOIN_HOVER)));
+            }
+
+            if (main.getuDataStorage().OPTIONS_CLICKABLE_MESSAGE) {
+                announcement.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/welcome "+player.getName()));
+            }
 
             List<Player> onlines = new ArrayList<>();
             for (Player players : Bukkit.getOnlinePlayers()) {
