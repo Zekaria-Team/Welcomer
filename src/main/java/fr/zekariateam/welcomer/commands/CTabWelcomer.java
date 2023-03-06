@@ -20,6 +20,7 @@ public class CTabWelcomer implements TabCompleter {
 
             if (args.length == 1) {
                 list.add("spawn");
+                list.add("reload");
             } else if (args.length == 2) {
                 list.add("set");
                 list.add("enable");
