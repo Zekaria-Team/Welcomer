@@ -20,6 +20,21 @@ public class CWelcomer implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
+        if (args.length == 1) {
+            if (args[0].equalsIgnoreCase("reload")) {
+                try {
+                    main.getmFiles().config.save();
+                    main.getmFiles().messages.save();
+                    main.getmFiles().config.reload();
+                    main.getmFiles().messages.reload();
+                    main.getuDataStorage().LoadConfig();
+                    main.getuDataStorage().LoadMessages();
+                } catch (IOException exception) {
+                    main.Log(Level.SEVERE, exception.getMessage());
+                }
+            }
+        }
+
         if (args.length >= 2 && args[0].equalsIgnoreCase("spawn")) {
 
             if (args[1].equalsIgnoreCase("enable")) {
