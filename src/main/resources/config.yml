@@ -12,7 +12,7 @@ first-join:
   options:
     #Enable or Disable the ability to click on the message
     clickable-message: true
-    #Allows you to activate or deactivate the ability to see the “hover” message when you move your mouse over it.
+    #Enable or Disable the ability to see the “hover” message when you move your mouse over it.
     hover-message: true
 
 # Spawn #
