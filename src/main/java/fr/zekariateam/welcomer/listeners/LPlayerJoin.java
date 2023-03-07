@@ -38,6 +38,10 @@ public class LPlayerJoin implements Listener {
             /*
             Welcome
              */
+            if (data.FIRST_JOIN_ANNOUNCEMENT.contains("<center>")) {
+                data.FIRST_JOIN_ANNOUNCEMENT = data.FIRST_JOIN_ANNOUNCEMENT.replace("<center>", "");
+                data.FIRST_JOIN_ANNOUNCEMENT = main.getuUtils().sendCenteredMessage(data.FIRST_JOIN_ANNOUNCEMENT);
+            }
             TextComponent announcement = new TextComponent(data.FIRST_JOIN_ANNOUNCEMENT.replace("%player%", player.getName())
                     .replace("%joinedNumber%", Bukkit.getOfflinePlayers().length+""));
             if (main.getuDataStorage().OPTIONS_HOVER_MESSAGE) {

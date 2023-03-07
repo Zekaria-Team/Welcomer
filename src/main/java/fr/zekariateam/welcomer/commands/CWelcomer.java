@@ -3,6 +3,7 @@ package fr.zekariateam.welcomer.commands;
 import dev.dejvokep.boostedyaml.YamlDocument;
 import fr.zekariateam.welcomer.Welcomer;
 import fr.zekariateam.welcomer.utils.UDataStorage;
+import fr.zekariateam.welcomer.utils.UUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,6 +17,7 @@ public class CWelcomer implements CommandExecutor {
 
     private final Welcomer plugin = Welcomer.getInstance();
     private final UDataStorage data = plugin.getuDataStorage();
+    private final UUtils utils = plugin.getuUtils();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -28,13 +30,13 @@ public class CWelcomer implements CommandExecutor {
                         plugin.getmFiles().messages.reload();
                         plugin.getuDataStorage().LoadConfig();
                         plugin.getuDataStorage().LoadMessages();
-                        sender.sendMessage(data.RELOAD_SUCCESS);
+                        utils.sendMessage(data.RELOAD_SUCCESS, sender);
                     } catch (IOException exception) {
                         plugin.Log(Level.SEVERE, exception.getMessage());
-                        sender.sendMessage(data.RELOAD_ERROR);
+                        utils.sendMessage(data.RELOAD_ERROR, sender);
                     }
                 } else {
-                    sender.sendMessage(data.ERRORS_NO_PERMISSION);
+                    utils.sendMessage(data.ERRORS_NO_PERMISSION, sender);
                 }
                 return true;
             }
@@ -42,12 +44,12 @@ public class CWelcomer implements CommandExecutor {
             if (args[0].equalsIgnoreCase("help")) {
 
                 for (String string : data.HELP_PLAYER) {
-                    sender.sendMessage(string);
+                    utils.sendMessage(string, sender);
                 }
 
                 if (sender.hasPermission("welcomer.admin")) {
                     for (String string : data.HELP_ADMIN) {
-                        sender.sendMessage(string);
+                        utils.sendMessage(string, sender);
                     }
                 }
                 return true;
@@ -66,13 +68,13 @@ public class CWelcomer implements CommandExecutor {
                             plugin.getmFiles().config.save();
                             plugin.getmFiles().config.reload();
                             plugin.getuDataStorage().LoadConfig();
-                            sender.sendMessage(data.SPAWN_ENABLE_MESSAGE);
+                            utils.sendMessage(data.SPAWN_ENABLE_MESSAGE, sender);
                         } catch (IOException exception) {
                             plugin.Log(Level.SEVERE, exception.getMessage());
                         }
 
                     } else {
-                        sender.sendMessage(data.SPAWN_ALREADY_ENABLE);
+                        utils.sendMessage(data.SPAWN_ALREADY_ENABLE, sender);
                     }
                     return true;
                 } else if (args[1].equalsIgnoreCase("disable")) {
@@ -84,13 +86,13 @@ public class CWelcomer implements CommandExecutor {
                             plugin.getmFiles().config.save();
                             plugin.getmFiles().config.reload();
                             plugin.getuDataStorage().LoadConfig();
-                            sender.sendMessage(data.SPAWN_DISABLE_MESSAGE);
+                            utils.sendMessage(data.SPAWN_DISABLE_MESSAGE, sender);
                         } catch (IOException exception) {
                             plugin.Log(Level.SEVERE, exception.getMessage());
                         }
 
                     } else {
-                        sender.sendMessage(data.SPAWN_ALREADY_DISABLE);
+                        utils.sendMessage(data.SPAWN_ALREADY_DISABLE, sender);
                     }
                     return true;
                 } else if (args[1].equalsIgnoreCase("set")) {
@@ -99,12 +101,12 @@ public class CWelcomer implements CommandExecutor {
                         Player player = (Player) sender;
                         SetSpawn(player);
                     } else {
-                        sender.sendMessage(data.ERRORS_NOT_A_PLAYER);
+                        utils.sendMessage(data.ERRORS_NOT_A_PLAYER, sender);
                     }
                     return true;
                 }
             } else {
-                sender.sendMessage(data.ERRORS_NO_PERMISSION);
+                utils.sendMessage(data.ERRORS_NO_PERMISSION, sender);
             }
 
             return true;
@@ -129,7 +131,7 @@ public class CWelcomer implements CommandExecutor {
             config.reload();
             data.LoadConfig();
 
-            player.sendMessage(data.SPAWN_SET);
+            utils.sendMessage(data.SPAWN_SET, player);
 
         } catch (IOException exception) {
             plugin.Log(Level.SEVERE, exception.getMessage());
