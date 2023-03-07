@@ -1,9 +1,10 @@
-################
-# Messages.yml #
-################
+####################
+# Welcomer  V1.0.5 #
+#   Messages.yml   #
+####################
 
 # Do not touch this parameter!
-messages-version: 1
+messages-version: 2
 
 prefix: "&7[&2Welcomer&7] "
 
@@ -14,6 +15,7 @@ errors:
   player-not-found: "&cPlayer not found!"
   cant-welcome: "&cYou can't welcome this player!"
   cant-welcome-yourself: "&cYou can't welcome yourself!"
+  no-permission: "&cError, you don't have permission!"
 
 # First Join #
 first-join:
@@ -28,3 +30,19 @@ spawn:
   disable: "&cYou have disabled the spawn system !"
   already-enable: "&cSpawn is already enabled !"
   already-disable: "&cSpawn is already disabled !"
+
+others:
+  reload:
+    success: "&2Plugin successfully reloaded."
+    error: "&cThe Plugin didn't reloaded ! &6See console."
+  help:
+    player:
+      - "&7─── &2&lWelcomer &7───"
+      - "&7Options:"
+      - "&7[] &f» &cRequired"
+      - "&7<> &f» &7Optional"
+      - ""
+      - "&e/welcome &c[&rnew-player&c] &f» &7Command to welcome people"
+    admin:
+      - "&e/welcomer &2reload &f» &7Command to reload the configuration and messages of the plugin."
+      - "&e/welcomer &2spawn &c[&renable &6|&r disable &6|&r set&c] &f» &7Command to manage the spawn system."

@@ -14,74 +14,100 @@ import java.util.logging.Level;
 
 public class CWelcomer implements CommandExecutor {
 
-    private final Welcomer main = Welcomer.getInstance();
-    private final UDataStorage data = main.getuDataStorage();
+    private final Welcomer plugin = Welcomer.getInstance();
+    private final UDataStorage data = plugin.getuDataStorage();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("reload")) {
-                try {
-                    main.getmFiles().config.save();
-                    main.getmFiles().messages.save();
-                    main.getmFiles().config.reload();
-                    main.getmFiles().messages.reload();
-                    main.getuDataStorage().LoadConfig();
-                    main.getuDataStorage().LoadMessages();
-                } catch (IOException exception) {
-                    main.Log(Level.SEVERE, exception.getMessage());
+                if (sender.hasPermission("welcomer.admin")) {
+                    try {
+                        plugin.getmFiles().config.reload();
+                        plugin.getmFiles().messages.reload();
+                        plugin.getuDataStorage().LoadConfig();
+                        plugin.getuDataStorage().LoadMessages();
+                        sender.sendMessage(data.RELOAD_SUCCESS);
+                    } catch (IOException exception) {
+                        plugin.Log(Level.SEVERE, exception.getMessage());
+                        sender.sendMessage(data.RELOAD_ERROR);
+                    }
+                } else {
+                    sender.sendMessage(data.ERRORS_NO_PERMISSION);
                 }
+                return true;
             }
+
+            if (args[0].equalsIgnoreCase("help")) {
+
+                for (String string : data.HELP_PLAYER) {
+                    sender.sendMessage(string);
+                }
+
+                if (sender.hasPermission("welcomer.admin")) {
+                    for (String string : data.HELP_ADMIN) {
+                        sender.sendMessage(string);
+                    }
+                }
+                return true;
+            }
+
         }
 
         if (args.length >= 2 && args[0].equalsIgnoreCase("spawn")) {
 
-            if (args[1].equalsIgnoreCase("enable")) {
-                if (!data.SPAWN_ENABLE) {
+            if (sender.hasPermission("welcomer.admin")) {
+                if (args[1].equalsIgnoreCase("enable")) {
+                    if (!data.SPAWN_ENABLE) {
 
-                    try {
-                        main.getmFiles().config.set("spawn.enable", true);
-                        main.getmFiles().config.save();
-                        main.getmFiles().config.reload();
-                        main.getuDataStorage().LoadConfig();
-                        sender.sendMessage(data.PREFIX + data.SPAWN_ENABLE_MESSAGE);
-                    } catch (IOException exception) {
-                        main.Log(Level.SEVERE, exception.getMessage());
+                        try {
+                            plugin.getmFiles().config.set("spawn.enable", true);
+                            plugin.getmFiles().config.save();
+                            plugin.getmFiles().config.reload();
+                            plugin.getuDataStorage().LoadConfig();
+                            sender.sendMessage(data.SPAWN_ENABLE_MESSAGE);
+                        } catch (IOException exception) {
+                            plugin.Log(Level.SEVERE, exception.getMessage());
+                        }
+
+                    } else {
+                        sender.sendMessage(data.SPAWN_ALREADY_ENABLE);
                     }
+                    return true;
+                } else if (args[1].equalsIgnoreCase("disable")) {
 
-                } else {
-                    sender.sendMessage(data.PREFIX + data.SPAWN_ALREADY_ENABLE);
-                }
-                return true;
-            } else if (args[1].equalsIgnoreCase("disable")) {
+                    if (data.SPAWN_ENABLE) {
 
-                if (data.SPAWN_ENABLE) {
+                        try {
+                            plugin.getmFiles().config.set("spawn.enable", false);
+                            plugin.getmFiles().config.save();
+                            plugin.getmFiles().config.reload();
+                            plugin.getuDataStorage().LoadConfig();
+                            sender.sendMessage(data.SPAWN_DISABLE_MESSAGE);
+                        } catch (IOException exception) {
+                            plugin.Log(Level.SEVERE, exception.getMessage());
+                        }
 
-                    try {
-                        main.getmFiles().config.set("spawn.enable", false);
-                        main.getmFiles().config.save();
-                        main.getmFiles().config.reload();
-                        main.getuDataStorage().LoadConfig();
-                        sender.sendMessage(data.PREFIX + data.SPAWN_DISABLE_MESSAGE);
-                    } catch (IOException exception) {
-                        main.Log(Level.SEVERE, exception.getMessage());
+                    } else {
+                        sender.sendMessage(data.SPAWN_ALREADY_DISABLE);
                     }
+                    return true;
+                } else if (args[1].equalsIgnoreCase("set")) {
 
-                } else {
-                    sender.sendMessage(data.PREFIX + data.SPAWN_ALREADY_DISABLE);
+                    if (sender instanceof Player) {
+                        Player player = (Player) sender;
+                        SetSpawn(player);
+                    } else {
+                        sender.sendMessage(data.ERRORS_NOT_A_PLAYER);
+                    }
+                    return true;
                 }
-                return true;
-            } else if (args[1].equalsIgnoreCase("set")) {
-
-                if (sender instanceof Player) {
-                    Player player = (Player) sender;
-                    SetSpawn(player);
-                } else {
-                    sender.sendMessage(data.PREFIX + data.ERRORS_NOT_A_PLAYER);
-                }
-                return true;
+            } else {
+                sender.sendMessage(data.ERRORS_NO_PERMISSION);
             }
+
+            return true;
 
         }
 
@@ -89,7 +115,7 @@ public class CWelcomer implements CommandExecutor {
     }
 
     private void SetSpawn(Player player) {
-        YamlDocument config = main.getmFiles().config;
+        YamlDocument config = plugin.getmFiles().config;
 
         try {
             config.set("spawn.location.world", player.getLocation().getWorld().getName());
@@ -103,10 +129,10 @@ public class CWelcomer implements CommandExecutor {
             config.reload();
             data.LoadConfig();
 
-            player.sendMessage(data.PREFIX + data.SPAWN_SET);
+            player.sendMessage(data.SPAWN_SET);
 
         } catch (IOException exception) {
-            main.Log(Level.SEVERE, exception.getMessage());
+            plugin.Log(Level.SEVERE, exception.getMessage());
         }
 
     }

@@ -2,15 +2,28 @@ name: Welcomer
 version: '${project.version}'
 main: fr.zekariateam.welcomer.Welcomer
 api-version: 1.14
-authors: [ Velris, Myoxyss ]
+authors: [ Velris ]
 description: Plugin made to welcome players.
 website: https://discord.gg/yDtMvtkk5F
 commands:
   welcome:
-    description: Commande pour souhaiter la bienvenue
-    usage: /<command> [player]
+    description: Command to welcome people
+    usage: /welcomer help
     permission: welcomer.welcome
   welcomer:
-    description: Commande de configuration du plugin
-    permission: welcomer.config
-    usage: /<command> spawn [set | enable | disable]
+    description: Plugin configuration command
+    permission: welcomer.admin
+    usage: /<command> help
+permissions:
+  welcomer.welcome:
+    description: Allows you to use /welcome [player]
+    default: op
+  welcomer.admin:
+    description: Allows you to use admin command of the plugin
+    default: op
+  welcomer.*:
+    description: Allows you to use every /welcomer command
+    default: op
+    children:
+      welcomer.welcome: true
+      welcomer.admin: true
