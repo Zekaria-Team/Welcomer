@@ -38,7 +38,8 @@ public class LPlayerJoin implements Listener {
             /*
             Welcome
              */
-            TextComponent announcement = new TextComponent(data.FIRST_JOIN_ANNOUNCEMENT.replace("%player%", player.getName()));
+            TextComponent announcement = new TextComponent(data.FIRST_JOIN_ANNOUNCEMENT.replace("%player%", player.getName())
+                    .replace("%joinedNumber%", Bukkit.getOfflinePlayers().length+""));
             if (main.getuDataStorage().OPTIONS_HOVER_MESSAGE) {
                 announcement.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(data.FIRST_JOIN_HOVER)));
             }

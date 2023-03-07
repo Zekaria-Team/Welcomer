@@ -66,7 +66,6 @@ public final class Welcomer extends JavaPlugin {
         Metrics metrics = new Metrics(this, 17540);
 
         Log(Level.INFO, "Welcomer has been loaded!");
-
     }
 
     @Override

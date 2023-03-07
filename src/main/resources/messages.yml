@@ -1,10 +1,10 @@
 ####################
-# Welcomer  V1.0.5 #
+# Welcomer  V1.0.6 #
 #   Messages.yml   #
 ####################
 
 # Do not touch this parameter!
-messages-version: 2
+messages-version: 3
 
 prefix: "&7[&2Welcomer&7] "
 
@@ -19,7 +19,8 @@ errors:
 
 # First Join #
 first-join:
-  announcement: "&cWelcome &b%player%&c on MyServer!"
+  # %joinedNumber% 🡢 Is the amount of players registered on the server.
+  announcement: "&cWelcome &b%player%&c on MyServer! &7You are the &6%joinedNumber%th &7player to join us!"
   hover: "&bClick here to welcome him!"
   welcome: "Welcome %target% !"
 
