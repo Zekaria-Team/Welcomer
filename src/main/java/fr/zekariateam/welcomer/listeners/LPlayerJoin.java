@@ -38,19 +38,31 @@ public class LPlayerJoin implements Listener {
             /*
             Welcome
              */
-            TextComponent announcement = new TextComponent(data.FIRST_JOIN_ANNOUNCEMENT.replace("%player%", player.getName())
-                    .replace("%joinedNumber%", Bukkit.getOfflinePlayers().length+""));
-            if (main.getuDataStorage().OPTIONS_HOVER_MESSAGE) {
-                announcement.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(data.FIRST_JOIN_HOVER)));
-            }
+            List<TextComponent> messages = new ArrayList<>();
+            for (String str : data.FIRST_JOIN_ANNOUNCEMENT) {
+                String string = str.replace("%player%", player.getName()).replace("%joinedNumber%", Bukkit.getOfflinePlayers().length+"");
+                if (string.contains("<center>")) {
+                    string = string.replace("<center>", "");
+                    string = main.getuUtils().sendCenteredMessage(string);
+                }
 
-            if (main.getuDataStorage().OPTIONS_CLICKABLE_MESSAGE) {
-                announcement.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/welcome "+player.getName()));
+                TextComponent textComponent = new TextComponent(string);
+
+                if (main.getuDataStorage().OPTIONS_HOVER_MESSAGE) {
+                    textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(data.FIRST_JOIN_HOVER)));
+                }
+
+                if (main.getuDataStorage().OPTIONS_CLICKABLE_MESSAGE) {
+                    textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/welcome "+player.getName()));
+                }
+                messages.add(textComponent);
             }
 
             List<Player> onlines = new ArrayList<>();
             for (Player players : Bukkit.getOnlinePlayers()) {
-                players.spigot().sendMessage(announcement);
+                for (TextComponent textComponent : messages) {
+                    players.spigot().sendMessage(textComponent);
+                }
             }
             main.getuDataStorage().welcomers.put(player, onlines);
             Bukkit.getScheduler().runTaskLater(main, () -> data.welcomers.remove(player), data.FIRST_JOIN_TIMER);
