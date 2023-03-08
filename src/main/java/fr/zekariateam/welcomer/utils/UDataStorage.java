@@ -43,7 +43,7 @@ public class UDataStorage {
     public String ERRORS_CANT_WELCOME_YOURSELF;
     public String ERRORS_NO_PERMISSION;
     //FIRST JOIN
-    public String FIRST_JOIN_ANNOUNCEMENT;
+    public List<String> FIRST_JOIN_ANNOUNCEMENT;
     public String FIRST_JOIN_HOVER;
     public String FIRST_JOIN_WELCOME;
     //SPAWN
@@ -89,7 +89,13 @@ public class UDataStorage {
         ERRORS_CANT_WELCOME_YOURSELF = PREFIX + messages.getString("errors.cant-welcome-yourself").replace("&", "§");
         ERRORS_NO_PERMISSION = PREFIX + messages.getString("errors.no-permission").replace("&", "§");
 
-        FIRST_JOIN_ANNOUNCEMENT = messages.getString("first-join.announcement").replace("&", "§");
+        FIRST_JOIN_ANNOUNCEMENT = messages.getStringList("first-join.announcement");
+        for (int i = 0; i < FIRST_JOIN_ANNOUNCEMENT.size(); i++) {
+            String str = FIRST_JOIN_ANNOUNCEMENT.get(i);
+            str = str.replace("&", "§");
+            FIRST_JOIN_ANNOUNCEMENT.set(i, str);
+        }
+
         FIRST_JOIN_HOVER = messages.getString("first-join.hover").replace("&", "§");
         FIRST_JOIN_WELCOME = messages.getString("first-join.welcome").replace("&", "§");
 

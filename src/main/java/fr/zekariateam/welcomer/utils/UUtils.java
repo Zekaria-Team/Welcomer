@@ -5,8 +5,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class UUtils {
 
-    private final static int CENTER_PX = 154;
-
     public void sendMessage(String message, CommandSender sender) {
         String finalMessage = message;
 
@@ -19,6 +17,7 @@ public class UUtils {
     }
 
     public String sendCenteredMessage(@NotNull String message){
+        int CENTER_PX = 154;
         int messagePxSize = 0;
         boolean previousCode = false;
         boolean isBold = false;
