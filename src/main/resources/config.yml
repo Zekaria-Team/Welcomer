@@ -3,7 +3,7 @@
 ##############
 
 # Do not touch this parameter!
-config-version: 2
+config-version: 3
 
 # First Join #
 # How much time online players have to welcome. (In seconds)
