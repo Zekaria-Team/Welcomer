@@ -26,6 +26,7 @@ public class CWelcomer implements CommandExecutor {
             if (args[0].equalsIgnoreCase("reload")) {
                 if (sender.hasPermission("welcomer.admin")) {
                     try {
+                        data.REWARDS.clear();
                         plugin.getmFiles().config.reload();
                         plugin.getmFiles().messages.reload();
                         plugin.getuDataStorage().LoadConfig();

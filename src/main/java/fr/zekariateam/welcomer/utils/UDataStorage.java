@@ -2,12 +2,15 @@ package fr.zekariateam.welcomer.utils;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
 import fr.zekariateam.welcomer.Welcomer;
+import fr.zekariateam.welcomer.objects.Reward;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 
 public class UDataStorage {
 
@@ -31,6 +34,8 @@ public class UDataStorage {
     public Float SPAWN_Z;
     public Float SPAWN_YAW;
     public Float SPAWN_PITCH;
+    //Rewards
+    public List<Reward> REWARDS = new ArrayList<>();
 
     /*
     MESSAGES
@@ -75,6 +80,21 @@ public class UDataStorage {
             SPAWN_YAW = config.getFloat("spawn.location.yaw");
             SPAWN_PITCH = config.getFloat("spawn.location.pitch");
         }
+
+        for (Object key : config.getSection("rewards").getKeys()) {
+            Integer chance = config.getInt("rewards."+key+".chance");
+            List<String> commands = new ArrayList<>(config.getStringList("rewards." + key + ".commands"));
+            List<String> messages = new ArrayList<>(config.getStringList("rewards." + key + ".messages"));
+
+            for (int i = 0; i < messages.size(); i++) {
+                String str = messages.get(i);
+                str = str.replace("&", "§");
+                messages.set(i, str);
+            }
+
+            REWARDS.add(new Reward(chance, commands, messages));
+        }
+
     }
 
     public void LoadMessages() {

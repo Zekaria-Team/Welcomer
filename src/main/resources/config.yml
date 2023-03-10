@@ -26,3 +26,17 @@ spawn:
     z: 0.0
     yaw: 0.0
     pitch: 0.0
+
+rewards:
+  one:
+    chance: 100
+    commands:
+      - "give %welcomer% diamond 1"
+    messages:
+      - "&cYou have received 1 diamond"
+  two:
+    chance: 50
+    commands:
+      - "give %welcomer% dirt 5"
+    messages:
+      - "&cYou have received 5 dirt"

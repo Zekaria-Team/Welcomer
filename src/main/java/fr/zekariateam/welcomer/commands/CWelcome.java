@@ -1,6 +1,7 @@
 package fr.zekariateam.welcomer.commands;
 
 import fr.zekariateam.welcomer.Welcomer;
+import fr.zekariateam.welcomer.objects.Reward;
 import fr.zekariateam.welcomer.utils.UDataStorage;
 import fr.zekariateam.welcomer.utils.UUtils;
 import org.bukkit.Bukkit;
@@ -9,6 +10,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Random;
+import java.util.logging.Level;
 
 public class CWelcome implements CommandExecutor {
 
@@ -48,6 +52,27 @@ public class CWelcome implements CommandExecutor {
             } else {
                 player.chat(data.FIRST_JOIN_WELCOME.replace("%target%", target.getName()));
                 data.welcomers.get(target).add(player);
+
+                //Reward
+                Random random = new Random();
+                for (Reward reward : data.REWARDS) {
+                    int randomINT = random.nextInt(100);
+
+                    plugin.Log(Level.INFO, "Int Random: " + randomINT);
+
+                    if (randomINT <= reward.getChance()) {
+                        for (String string : reward.getCommands()) {
+                            string = string.replace("%welcomer%", player.getName());
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), string);
+                        }
+
+                        for (String string : reward.getMessages()) {
+                            player.sendMessage(string);
+                        }
+
+                    }
+                }
+
             }
             return true;
         } else {
